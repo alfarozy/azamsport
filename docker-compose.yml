@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        user: azamsport
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: azamsport-app
+    container_name: azamsport-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    ports:
+      - "8222:8022"
+    networks:
+      - azamsport-bridge
+
+networks:
+  azamsport-bridge:
+    external: true
