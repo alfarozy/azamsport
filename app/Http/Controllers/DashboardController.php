@@ -20,8 +20,9 @@ class DashboardController extends Controller
             'income' => RentalOrder::where('status', 'confirmed')->sum('total_price'), // total pemasukan
         ];
         if (auth()->user()->role != 'admin') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses');
+            return redirect()->route('user.orders.index');
         }
+
         return view('backoffice.index', $data);
     }
 
