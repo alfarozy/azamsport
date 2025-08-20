@@ -22,13 +22,18 @@ class LoginController extends Controller
 
         if ($request->email && $request->password) {
 
-            $user = User::Where('role', 'admin')->whereEmail($request->email)->first();
+            $user = User::whereEmail($request->email)->first();
             if ($user && Hash::check($request->password, $user->password)) {
                 if ($user->enabled == 1) {
 
                     Auth::guard()->login($user);
 
-                    return redirect()->route('dashboard');
+                    if ($user->role == 'admin') {
+
+                        return redirect()->route('dashboard');
+                    } else {
+                        return redirect()->route('user.orders.index');
+                    }
                 } else {
                     return redirect()->route('login')->with('msg', '<b>Login gagal</b>,Akun belum aktif atau sementara dinonaktifkan oleh admin');
                 }

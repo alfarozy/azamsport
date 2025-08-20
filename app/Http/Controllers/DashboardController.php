@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\RentalOrder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,12 +14,14 @@ class DashboardController extends Controller
     public function index()
     {
         $data = [
-            'project' => 2,
-            'article' => 4,
-            'technology' => 5,
-            'project_popular' => 6,
-            'article_popular' => 8,
+            'product' => Product::count(),   // jumlah produk
+            'user' => User::count(),         // jumlah user
+            'rental' => RentalOrder::where('status', 'confirmed')->count(),     // jumlah data disewakan
+            'income' => RentalOrder::where('status', 'confirmed')->sum('total_price'), // total pemasukan
         ];
+        if (auth()->user()->role != 'admin') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses');
+        }
         return view('backoffice.index', $data);
     }
 
@@ -52,7 +56,6 @@ class DashboardController extends Controller
     {
         $attr  = $request->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email',
         ]);
 
         $user = User::findOrFail(Auth()->id());

@@ -5,6 +5,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <h2 class="fw-bold">Katalog Peralatan Olahraga</h2>
+
                 <div class="dropdown">
                     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown"
                         data-bs-toggle="dropdown">
@@ -24,6 +25,11 @@
                     </ul>
                 </div>
             </div>
+            @if (session()->has('success'))
+                <div class="alert bg-success text-center text-white">
+                    {!! session()->get('success') !!}
+                </div>
+            @endif
 
             <div class="row g-4">
                 @foreach ($products as $product)

@@ -10,24 +10,28 @@ class RentalOrder extends Model
     protected $table = 'rental_orders';
 
     protected $fillable = [
-        'product_id',        // produk yang disewa
-        'quantity',          // jumlah item
-        'rental_name',
+        'order_number',
+        'product_id',
+        'quantity',
+        'user_id',
         'rental_phone',
-        'rental_address',
-        'start_date',        // tanggal mulai
-        'end_date',          // tanggal pengembalian
-        'delivery_option',   // pickup / delivery
-        'delivery_address',  // alamat jika delivery
-        'notes',             // catatan khusus
-        'total_price',       // total harga
-        'status',            // pending, confirmed, cancelled, returned
-        'payment_status',    // unpaid, paid
-        'payment_method',    // transfer, qris, e-wallet
-        'payment_proof',     // bukti bayar (jika ada)
+        'start_date',
+        'end_date',
+        'delivery_option',
+        'delivery_address',
+        'notes',
+        'total_price',
+        'status',
+        'payment_status',
+        'payment_method',
+        'payment_proof',
     ];
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Relasi ke Produk

@@ -6,6 +6,12 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        if (auth()->user()->role != 'admin') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses');
+        }
+    }
     public function index()
     {
 

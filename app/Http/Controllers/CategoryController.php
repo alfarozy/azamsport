@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        if (auth()->user()->role != 'admin') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses');
+        }
+    }
     public function index()
     {
         $data = Category::with(['products'])->latest()->get();

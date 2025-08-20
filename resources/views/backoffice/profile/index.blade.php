@@ -46,7 +46,7 @@
                                     <div class="form-group row">
                                         <label for="inputEmail" class="col-lg-2 col-form-label">Email</label>
                                         <div class="col-lg-10">
-                                            <input type="email" name="email" value="{{ $user->email }}"
+                                            <input type="email" name="email" readonly value="{{ $user->email }}"
                                                 class="form-control" id="inputEmail">
 
                                             @error('email')

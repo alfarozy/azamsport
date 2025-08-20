@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="border-top pt-3">
-                                    <button type="button" class="btn btn-primary w-100 py-3" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
                                         data-bs-target="#confirmModal">
                                         <i class="fas fa-shopping-cart me-2"></i> Sewa Sekarang
                                     </button>
@@ -87,14 +87,11 @@
             </div>
         </section>
 
-        <!-- Modal Konfirmasi -->
         <!-- Modal Penyewaan -->
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="{{ route('rental.store') }}" method="POST" id="rentalForm">
+                <form action="{{ route('rental.store', $product->slug) }}" method="POST" id="rentalForm">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Form Penyewaan - {{ $product->name }}</h5>
@@ -136,9 +133,27 @@
                                 <textarea name="delivery_address" class="form-control" rows="2"></textarea>
                             </div>
 
+                            <div class="mb-3">
+                                <label class="form-label">whatsapp</label>
+                                <input type="text" name="rental_phone" id="rental_phone" class="form-control"
+                                    required placeholder="08123">
+                            </div>
+
+                            {{-- Metode Pembayaran --}}
+                            <div class="mb-3">
+                                <label class="form-label">Pilih metode pembayaran</label>
+                                <select name="payment_method" class="form-select" required>
+                                    <option value="">-- Pilih Bank --</option>
+                                    <option value="bca">Bank BCA</option>
+                                    <option value="bni">Bank BNI</option>
+                                    <option value="mandiri">Bank Mandiri</option>
+                                    <option value="bri">Bank BRI</option>
+                                </select>
+                            </div>
+
                             {{-- Catatan --}}
                             <div class="mb-3">
-                                <label class="form-label">Catatan</label>
+                                <label class="form-label">Catatan (opsional)</label>
                                 <textarea name="notes" class="form-control" rows="2"></textarea>
                             </div>
 

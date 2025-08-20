@@ -119,17 +119,21 @@
                         <a class="nav-link" href="{{ route('homepage.products') }}">Produk</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#tentang">Tentang Kami</a>
+                        <a class="nav-link" href="/#tentang">Tentang Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#faq">FAQ</a>
+                        <a class="nav-link" href="/#faq">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#kontak">Kontak</a>
+                        <a class="nav-link" href="/#kontak">Kontak</a>
                     </li>
                 </ul>
                 <div class="ms-lg-3 mt-3 mt-lg-0">
-                    <a href="#sewa" class="btn btn-primary">Mulai Sewa</a>
+                    @if (auth()->check())
+                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                    @endif
                 </div>
             </div>
         </div>

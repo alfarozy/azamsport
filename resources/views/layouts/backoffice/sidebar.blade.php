@@ -26,46 +26,69 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open mt-3">
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
-                    </a>
 
-                </li>
+                @if (Auth()->user()->role == 'user')
+                    <li class="nav-item">
+                        <a href="{{ route('user.orders.index') }}"
+                            class="nav-link {{ request()->routeIs('user.orders.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>
+                                Pesanan
+                            </p>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth()->user()->role == 'admin')
+                    <li class="nav-item menu-open mt-3">
+                        <a href="{{ route('dashboard') }}"
+                            class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
 
-                <li class="nav-header">Master data</li>
-                <li class="nav-item">
-                    <a href="{{ route('product.index') }}"
-                        class="nav-link {{ request()->routeIs('product*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-th-large"></i>
-                        <p>
-                            Products
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('category.index') }}"
-                        class="nav-link {{ request()->routeIs('category*') ? 'active' : '' }}">
-                        <i class="nav-icon far fa-list-alt"></i>
-                        <p>
-                            Categories
-                        </p>
-                    </a>
-                </li>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('user.orders.index') }}"
+                            class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>
+                                Pesanan
+                            </p>
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Users
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-header">Master data</li>
+                    <li class="nav-item">
+                        <a href="{{ route('product.index') }}"
+                            class="nav-link {{ request()->routeIs('product*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>
+                                Products
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('category.index') }}"
+                            class="nav-link {{ request()->routeIs('category*') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-list-alt"></i>
+                            <p>
+                                Categories
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('users.index') }}"
+                            class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Users
+                            </p>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="nav-header">Settings</li>
                 <li class="nav-item">

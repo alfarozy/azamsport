@@ -20,17 +20,14 @@
         </div>
         <!-- /.content-header -->
 
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
                 <div class="row">
+                    <!-- Produk -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $project }}</h3>
-
+                                <h3>{{ $product }}</h3>
                                 <p>Produk</p>
                             </div>
                             <div class="icon">
@@ -38,28 +35,25 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ./col -->
+
+                    <!-- User -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ $article }}</h3>
+                                <h3>{{ $user }}</h3>
                                 <p>User</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i class="ion ion-person"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- ./col -->
 
-                    <!-- ./col -->
+                    <!-- Disewakan -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ $technology }}</h3>
-
+                                <h3>{{ $rental }}</h3>
                                 <p>Disewakan</p>
                             </div>
                             <div class="icon">
@@ -67,74 +61,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Pemasukan -->
                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
                         <div class="small-box bg-secondary">
                             <div class="inner">
-                                <h3>0</h3>
-
+                                <h3>{{ number_format($income, 0, ',', '.') }}</h3>
                                 <p>Pemasukan</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion-cash"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- ./col -->
                 </div>
-
-                {{-- popular --}}
-                {{-- <div class="row">
-
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Article Popular </h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table">
-                                    <tr>
-                                        <td width="5%">#</td>
-                                        <td width="75%">Article</td>
-                                        <td width="20%">Views</td>
-                                    </tr>
-                                    @foreach ($article_popular as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ str()->limit($item->title, 80) }}</td>
-                                            <td>{{ $item->views }}</td>
-                                        </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Project Popular </h4>
-                            </div>
-                            <div class="card-body">
-                                <table class="table">
-                                    <tr>
-                                        <td width="5%">#</td>
-                                        <td width="75%">Project</td>
-                                        <td width="20%">Views</td>
-                                    </tr>
-                                    @foreach ($project_popular as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ str()->limit($item->title, 80) }}</td>
-                                            <td>{{ $item->views }}</td>
-                                        </tr>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- /.container-fluid -->
+            </div>
         </section>
-        <!-- /.content -->
+
     </div>
 @endsection
