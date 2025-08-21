@@ -69,7 +69,7 @@
         @yield('content')
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2025 <a href="https://alfarozy.id" class="text-muted">AzamSport</a></strong>
+            <strong>Copyright &copy; 2025 <a href="https://alfarozy.id" class="text-muted">AzimSport</a></strong>
         </footer>
 
 

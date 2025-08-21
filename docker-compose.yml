@@ -4,12 +4,12 @@ services:
   app:
     build:
       args:
-        user: azamsport
+        user: azimsport
         uid: 1000
       context: ./
       dockerfile: Dockerfile
-    image: azamsport-app
-    container_name: azamsport-app
+    image: azimsport-app
+    container_name: azimsport-app
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -17,8 +17,8 @@ services:
     ports:
       - "8222:8022"
     networks:
-      - azamsport-bridge
+      - azimsport-bridge
 
 networks:
-  azamsport-bridge:
+  azimsport-bridge:
     external: true

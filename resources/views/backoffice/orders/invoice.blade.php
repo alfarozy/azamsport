@@ -95,22 +95,22 @@
                                         @if ($order->payment_method == 'bca')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BCA</b> - 123456789 a.n PT Azam Sport Nusantara</li>
+                                                <li><b>BCA</b> - 123456789 a.n PT Azim Sport Nusantara</li>
                                             </ul>
                                         @elseif($order->payment_method == 'bni')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BNI</b> - 555555555 a.n PT Azam Sport Nusantara</li>
+                                                <li><b>BNI</b> - 555555555 a.n PT Azim Sport Nusantara</li>
                                             </ul>
                                         @elseif($order->payment_method == 'mandiri')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>Mandiri</b> - 987654321 a.n PT Azam Sport Nusantara</li>
+                                                <li><b>Mandiri</b> - 987654321 a.n PT Azim Sport Nusantara</li>
                                             </ul>
                                         @elseif($order->payment_method == 'bri')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BRI</b> - 777777777 a.n PT Azam Sport Nusantara</li>
+                                                <li><b>BRI</b> - 777777777 a.n PT Azim Sport Nusantara</li>
                                             </ul>
                                         @else
                                             <p><i>Belum memilih metode pembayaran</i></p>
