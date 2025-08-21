@@ -55,7 +55,7 @@ class HomeController extends Controller
 
     public function rentalStore(Request $request, $slug)
     {
-        if (auth()->check()) {
+        if (!auth()->check()) {
             return redirect()->route('login')->with('msg', 'Silahkan login terlebih dahulu');
         }
         $product = Product::where('slug', $slug)

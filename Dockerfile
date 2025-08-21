@@ -23,7 +23,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Install PHP dependencies (production mode)
-RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
+RUN composer install --optimize-autoloader --prefer-dist --no-interaction
 
 # Expose port
 EXPOSE 8022

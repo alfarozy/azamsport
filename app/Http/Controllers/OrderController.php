@@ -53,8 +53,10 @@ class OrderController extends Controller
         }
         $order = RentalOrder::findOrFail($id);
 
-        if ($order->payment_status !== 'waiting_confirmation') {
-            return back()->with('error', 'Order ini tidak dalam status menunggu konfirmasi.');
+        if ($order->status !== 'confirmed') {
+            if ($order->payment_status !== 'waiting_confirmation') {
+                return back()->with('error', 'Order ini tidak dalam status menunggu konfirmasi.');
+            }
         }
 
         if ($request->input('action') === 'approve') {
@@ -62,6 +64,10 @@ class OrderController extends Controller
                 'status' => 'confirmed',
                 'payment_status' => 'paid',
             ]);
+            // Tambahkan stok produk kembali
+            if ($order->product) {
+                $order->product->decrement('stock', $order->quantity);
+            }
             return back()->with('success', 'Pembayaran berhasil disetujui.');
         }
 
@@ -71,6 +77,19 @@ class OrderController extends Controller
                 'payment_status' => 'unpaid',
             ]);
             return back()->with('error', 'Pembayaran ditolak, order dibatalkan.');
+        }
+
+        if ($request->input('action') === 'return') {
+            $order->update([
+                'status' => 'returned',
+            ]);
+
+            // Tambahkan stok produk kembali
+            if ($order->product) {
+                $order->product->increment('stock', $order->quantity);
+            }
+
+            return back()->with('success', 'Produk berhasil dikembalikan dan stok diperbarui.');
         }
 
         return back()->with('error', 'Aksi tidak valid.');

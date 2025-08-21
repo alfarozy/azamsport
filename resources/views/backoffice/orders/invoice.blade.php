@@ -44,6 +44,18 @@
                                         <td><b>{{ $order->order_number }}</b></td>
                                     </tr>
                                     <tr>
+                                        <th>Pengguna</th>
+                                        <td>{{ $order->user->name ?? '-' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ $order->user->email ?? '-' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>No. Telepon</th>
+                                        <td>{{ $order->rental_phone ?? '-' }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Produk</th>
                                         <td>{{ $order->product->name ?? '-' }}</td>
                                     </tr>
@@ -59,6 +71,10 @@
                                     <tr>
                                         <th>Total Harga</th>
                                         <td><b>Rp{{ number_format($order->total_price, 0, ',', '.') }}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Catatan</th>
+                                        <td>{{ $order->note ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>
@@ -171,10 +187,28 @@
                                         </div>
                                     @endif
                                 @elseif($order->payment_status == 'paid')
-                                    <div class="alert alert-success mt-4">
-                                        ✅ Pembayaran sudah diterima. Terima kasih.
-                                    </div>
+                                    {{-- Tombol Pengembalian Produk --}}
+                                    @if ($order->status == 'confirmed' && auth()->user()->role == 'admin')
+                                        <div class="alert alert-info mt-4">
+                                            Produk sudah disetujui dan sedang dipakai.
+                                            Silakan klik tombol berikut jika produk sudah dikembalikan.
+                                        </div>
+
+                                        <form action="{{ route('admin.orders.confirmPayment', $order->id) }}"
+                                            method="POST" class="mt-3">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" name="action" value="return" class="btn btn-warning">
+                                                <i class="fa fa-undo"></i> Tandai Produk Dikembalikan
+                                            </button>
+                                        </form>
+                                    @else
+                                        <div class="alert alert-success mt-4">
+                                            Bukti pembayaran sudah dikirim. Produk sudah disetujui dan sedang dipakai.
+                                        </div>
+                                    @endif
                                 @endif
+
 
                             </div>
                         </div>

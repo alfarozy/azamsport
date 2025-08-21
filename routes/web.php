@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('homepage');
 Route::get('/products', [HomeController::class, 'products'])->name('homepage.products');
 Route::get('/products/{slug}', [HomeController::class, 'productDetail'])->name('homepage.products.detail');
-Route::post('/checkout/{slug}', [HomeController::class, 'rentalStore'])->name('rental.store');
+Route::post('/checkout/{slug}', [HomeController::class, 'rentalStore'])->middleware('auth')->name('rental.store');
 
 
 Route::prefix('dashboard')->group(function () {

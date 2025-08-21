@@ -16,8 +16,8 @@ class DashboardController extends Controller
         $data = [
             'product' => Product::count(),   // jumlah produk
             'user' => User::count(),         // jumlah user
-            'rental' => RentalOrder::where('status', 'confirmed')->count(),     // jumlah data disewakan
-            'income' => RentalOrder::where('status', 'confirmed')->sum('total_price'), // total pemasukan
+            'rental' => RentalOrder::whereIn('status', ['confirmed', 'returned'])->count(),     // jumlah data disewakan
+            'income' => RentalOrder::whereIn('status', ['confirmed', 'returned'])->sum('total_price'), // total pemasukan
         ];
         if (auth()->user()->role != 'admin') {
             return redirect()->route('user.orders.index');
