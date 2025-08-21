@@ -415,7 +415,7 @@
                             <i class="fas fa-phone-alt"></i>
                         </div>
                         <h4>Telepon</h4>
-                        <p class="text-muted mb-0">+62 812 3456 7890<br>Senin-Minggu, 08:00-20:00 WIB</p>
+                        <p class="text-muted mb-0">+62 8228 6456 213<br>Senin-Minggu, 08:00-20:00 WIB</p>
                     </div>
                 </div>
                 <div class="col-md-4">

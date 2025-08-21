@@ -111,22 +111,22 @@
                                         @if ($order->payment_method == 'bca')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BCA</b> - 123456789 a.n PT Azim Sport Nusantara</li>
+                                                <li><b>BCA</b> - 123456789 a.n Imran Syafri Yuldi</li>
                                             </ul>
                                         @elseif($order->payment_method == 'bni')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BNI</b> - 555555555 a.n PT Azim Sport Nusantara</li>
+                                                <li><b>BNI</b> - 555555555 a.n Imran Syafri Yuldi</li>
                                             </ul>
                                         @elseif($order->payment_method == 'mandiri')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>Mandiri</b> - 987654321 a.n PT Azim Sport Nusantara</li>
+                                                <li><b>Mandiri</b> - 987654321 a.n Imran Syafri Yuldi</li>
                                             </ul>
                                         @elseif($order->payment_method == 'bri')
                                             <p>Silakan transfer ke rekening berikut:</p>
                                             <ul>
-                                                <li><b>BRI</b> - 777777777 a.n PT Azim Sport Nusantara</li>
+                                                <li><b>BRI</b> - 5481 0103 1261 531 a.n Imran Syafri Yuldi</li>
                                             </ul>
                                         @else
                                             <p><i>Belum memilih metode pembayaran</i></p>
@@ -182,7 +182,7 @@
                                             Bukti pembayaran sudah dikirim. Menunggu konfirmasi admin.
                                             <p>Jika ada kendala atau ingin konfirmasi lebih cepat, silakan hubungi admin di:
                                                 <br>
-                                                <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a>
+                                                <a href="https://wa.me/6282286456213" target="_blank">+6282286456213</a>
                                             </p>
                                         </div>
                                     @endif
