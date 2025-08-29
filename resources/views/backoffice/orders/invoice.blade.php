@@ -182,7 +182,7 @@
                                             Bukti pembayaran sudah dikirim. Menunggu konfirmasi admin.
                                             <p>Jika ada kendala atau ingin konfirmasi lebih cepat, silakan hubungi admin di:
                                                 <br>
-                                                <a href="https://wa.me/6282286456213" target="_blank">+6282286456213</a>
+                                                <a href="https://wa.me/6282286456213" target="_blank">+62 822-8645-6213</a>
                                             </p>
                                         </div>
                                     @endif
