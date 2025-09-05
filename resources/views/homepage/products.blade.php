@@ -41,22 +41,35 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h5 class="card-title mb-0">{{ $product['name'] }}</h5>
-
                                 </div>
                                 <p class="text-muted small">{{ $product->category->name }}</p>
 
                                 <div class="mb-3 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <span class="fw-bold text-primary">
-                                            Rp{{ number_format($product['price'], 0, ',', '.') }}
-                                        </span>
-                                        <span class="text-muted small">/{{ $product['unit'] }}</span>
+                                        @if ($product->is_variant && $product->variants->count() > 0)
+                                            @php
+                                                $minPrice = $product->variants->min('price');
+                                                $maxPrice = $product->variants->max('price');
+                                                $totalStock = $product->variants->sum('stock');
+                                            @endphp
+                                            <span class="fw-bold text-primary">
+                                                Rp{{ number_format($minPrice, 0, ',', '.') }}
+                                                @if ($minPrice != $maxPrice)
+                                                    - Rp{{ number_format($maxPrice, 0, ',', '.') }}
+                                                @endif
+                                            </span>
+                                        @else
+                                            <span class="fw-bold text-primary">
+                                                Rp{{ number_format($product['price'], 0, ',', '.') }}
+                                            </span>
+                                            <span class="text-muted small">/{{ $product['unit'] }}</span>
+                                            @php $totalStock = $product->stock; @endphp
+                                        @endif
                                     </div>
-                                    <span class="badge bg-{{ $product['stock'] > 0 ? 'success' : 'secondary' }}">
-                                        {{ $product['stock'] > 0 ? 'Tersedia' : 'Habis' }}
+                                    <span class="badge bg-{{ $totalStock > 0 ? 'success' : 'secondary' }}">
+                                        {{ $totalStock > 0 ? 'Tersedia' : 'Habis' }}
                                     </span>
                                 </div>
-
                             </div>
                             <div class="card-footer bg-white border-0">
                                 <a href="{{ route('homepage.products.detail', ['slug' => $product->slug]) }}"
@@ -67,6 +80,7 @@
                         </div>
                     </div>
                 @endforeach
+
             </div>
 
             {{ $products->links() }}

@@ -74,7 +74,7 @@
                                     </tr>
                                     <tr>
                                         <th>Catatan</th>
-                                        <td>{{ $order->note ?? '-' }}</td>
+                                        <td>{{ $order->notes ?? '-' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Status</th>

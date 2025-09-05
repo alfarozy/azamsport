@@ -17,12 +17,17 @@ class Product extends Model
         'stock',
         'unit',
         'image',
+        'is_variant',
         'enabled',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
     }
 
     public function getThumbnail()

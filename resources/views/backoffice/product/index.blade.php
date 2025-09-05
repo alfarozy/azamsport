@@ -70,16 +70,46 @@
                                                         alt="" srcset="">
                                                 </td>
                                                 <td class="align-middle">
-                                                    <b class="text-truncate"><a class="text-dark"
-                                                            href="{{ route('product.show', $item->slug) }}">{{ $item->name }}</a></b>
-                                                    <span
-                                                        class="badge bg-light border shadow-sm float-right">{{ $item->views }}
-                                                        Views
+                                                    <b class="text-truncate">
+                                                        <a class="text-dark"
+                                                            href="{{ route('product.show', $item->slug) }}">
+                                                            {{ $item->name }}
+                                                        </a>
+                                                    </b>
+                                                    <span class="badge bg-light border shadow-sm float-right">
+                                                        {{ $item->unit }}
                                                     </span>
                                                     <br>
-                                                    <span class="badge bg-secondary border mr-2">{{ $item->category->name }}
-                                                    </span>
+
+                                                    <span
+                                                        class="badge bg-secondary border mr-2">{{ $item->category->name }}</span>
+
+                                                    <div class="mt-2">
+                                                        @if ($item->is_variant && $item->variants->count())
+                                                            <ul class="list-unstyled mb-0">
+                                                                @foreach ($item->variants as $variant)
+                                                                    <li>
+                                                                        <span
+                                                                            class="badge bg-info">{{ $variant->name }}</span>
+                                                                        <small class="text-muted">
+                                                                            Rp
+                                                                            {{ number_format($variant->price, 0, ',', '.') }},
+                                                                            Stock: {{ $variant->stock }}
+                                                                        </small>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <span class="badge bg-success">
+                                                                Rp {{ number_format($item->price, 0, ',', '.') }}
+                                                            </span>
+                                                            <span class="badge bg-warning">
+                                                                Stock: {{ $item->stock }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
                                                 </td>
+
                                                 <td class="text-center align-middle">
                                                     @if ($item->enabled == 1)
                                                         <button class="btn btn-sm btn-success">Active</button>

@@ -65,7 +65,6 @@
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
-
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea name="description" class="form-control editor" rows="4">{{ old('description') }}</textarea>
@@ -91,6 +90,45 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label>Has Variant?</label>
+                                                <select name="is_variant" id="is_variant" class="form-control">
+                                                    <option value="0" selected>No</option>
+                                                    <option value="1">Yes</option>
+                                                </select>
+                                            </div>
+
+                                            <div id="variant-wrapper" style="display: none;">
+                                                <hr>
+                                                <h5>Product Variants</h5>
+                                                <div id="variant-container">
+                                                    <div class="variant-item border rounded p-2 mb-2">
+                                                        <div class="row g-2 align-items-end">
+                                                            <div class="col-md-3">
+                                                                <input type="text" name="variants[0][name]"
+                                                                    class="form-control" placeholder="X">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="number" name="variants[0][price]"
+                                                                    class="form-control" placeholder="Price (Rp)">
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="number" name="variants[0][stock]"
+                                                                    class="form-control" placeholder="Stock">
+                                                            </div>
+                                                            <div class="col-md-1 d-grid">
+                                                                <button type="button"
+                                                                    class="btn btn-danger btn-sm remove-variant"><i
+                                                                        class="fa fa-trash"> </i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-primary btn-sm mt-2"
+                                                    id="add-variant">+ Add Variant</button>
+                                            </div>
+
+
+                                            <div class="form-group" id="price-group">
                                                 <label>Price (Rp)</label>
                                                 <input type="number" name="price" value="{{ old('price') }}"
                                                     class="form-control">
@@ -99,7 +137,7 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group" id="stock-group">
                                                 <label>Stock</label>
                                                 <input type="number" name="stock" value="{{ old('stock') }}"
                                                     class="form-control">
@@ -129,8 +167,8 @@
                                             <div class="form-group">
                                                 <label>Image</label>
                                                 <div class="custom-file">
-                                                    <input type="file" name="image" class="custom-file-input input-img"
-                                                        id="exampleInputFile">
+                                                    <input type="file" name="image"
+                                                        class="custom-file-input input-img" id="exampleInputFile">
                                                     <label class="custom-file-label" for="exampleInputFile">Choose
                                                         Image</label>
                                                 </div>
@@ -174,7 +212,79 @@
 
 
 @section('script')
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const isVariant = document.getElementById("is_variant");
+            const variantWrapper = document.getElementById("variant-wrapper");
+            const variantContainer = document.getElementById("variant-container");
+            const addVariantBtn = document.getElementById("add-variant");
+
+            // Price & Stock default
+            const priceField = document.querySelector('input[name="price"]').closest(".form-group");
+            const stockField = document.querySelector('input[name="stock"]').closest(".form-group");
+
+            let variantIndex = 1;
+
+            // Toggle tampil/hidden varian + hide price/stock
+            function toggleVariant() {
+                if (isVariant.value == "1") {
+                    variantWrapper.style.display = "block";
+                    priceField.style.display = "none";
+                    stockField.style.display = "none";
+                } else {
+                    variantWrapper.style.display = "none";
+                    priceField.style.display = "block";
+                    stockField.style.display = "block";
+                }
+            }
+
+            // Jalankan saat awal load (misal saat edit data)
+            toggleVariant();
+
+            // Jalankan saat select berubah
+            isVariant.addEventListener("change", toggleVariant);
+
+            // Tambah varian baru
+            addVariantBtn.addEventListener("click", function() {
+                let variantItem = `
+               <div class="variant-item border rounded p-2 mb-2">
+                <div class="row g-2 align-items-end">
+                    <div class="col-md-3">
+                        <input type="text" name="variants[${variantIndex}][name]"
+                            class="form-control" placeholder="Variant Name">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" name="variants[${variantIndex}][price]"
+                            class="form-control" placeholder="Price (Rp)">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" name="variants[${variantIndex}][stock]"
+                            class="form-control" placeholder="Stock">
+                    </div>
+                    <div class="col-md-1 d-grid">
+                         <button type="button" class="btn btn-danger btn-sm remove-variant"><i
+                                                                        class="fa fa-trash"> </i></button>
+                    </div>
+                </div>
+            </div>
+
+            `;
+                variantContainer.insertAdjacentHTML("beforeend", variantItem);
+                variantIndex++;
+            });
+
+            // Remove varian
+            variantContainer.addEventListener("click", function(e) {
+                if (e.target.classList.contains("remove-variant")) {
+                    e.target.closest(".variant-item").remove();
+                }
+            });
+        });
+    </script>
+
     <script src="/assets/js/ckeditor.js"></script>
+
     <script>
         class MyUploadAdapter {
             constructor(loader) {

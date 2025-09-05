@@ -73,30 +73,40 @@
             <div class="row g-4">
                 <!-- Produk 1 -->
                 @foreach ($products as $product)
+                    @php
+                        $price =
+                            $product->is_variant && $product->variants->count()
+                                ? $product->variants->first()->price
+                                : $product->price;
+
+                        $stock =
+                            $product->is_variant && $product->variants->count()
+                                ? $product->variants->first()->stock
+                                : $product->stock;
+                    @endphp
+
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="card h-100 border-0 shadow-sm">
                             <div class="position-relative">
-                                <img src="{{ $product->getThumbnail() }}" class="card-img-top" alt="{{ $product['name'] }}">
+                                <img src="{{ $product->getThumbnail() }}" class="card-img-top" alt="{{ $product->name }}">
                             </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="card-title mb-0">{{ $product['name'] }}</h5>
-
+                                    <h5 class="card-title mb-0">{{ $product->name }}</h5>
                                 </div>
                                 <p class="text-muted small">{{ $product->category->name }}</p>
 
                                 <div class="mb-3 d-flex justify-content-between align-items-center">
                                     <div>
                                         <span class="fw-bold text-primary">
-                                            Rp{{ number_format($product['price'], 0, ',', '.') }}
+                                            Rp{{ number_format($price, 0, ',', '.') }}
                                         </span>
-                                        <span class="text-muted small">/{{ $product['unit'] }}</span>
+                                        <span class="text-muted small">/{{ $product->unit }}</span>
                                     </div>
-                                    <span class="badge bg-{{ $product['stock'] > 0 ? 'success' : 'secondary' }}">
-                                        {{ $product['stock'] > 0 ? 'Tersedia' : 'Habis' }}
+                                    <span class="badge bg-{{ $stock > 0 ? 'success' : 'secondary' }}">
+                                        {{ $stock > 0 ? 'Tersedia' : 'Habis' }}
                                     </span>
                                 </div>
-
                             </div>
                             <div class="card-footer bg-white border-0">
                                 <a href="{{ route('homepage.products.detail', ['slug' => $product->slug]) }}"
@@ -107,6 +117,7 @@
                         </div>
                     </div>
                 @endforeach
+
             </div>
 
             <div class="text-center mt-5">
@@ -406,7 +417,8 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <h4>Lokasi</h4>
-                        <p class="text-muted mb-0">Jl. Perintis Kemerdekaan No. 123<br>Kota Padang, Sumatera Barat</p>
+                        <p class="text-muted mb-0">586M+PRH, Batipuh Panjang, Kec. Koto Tangah,Kota Padang, Sumatera
+                            Barat</p>
                     </div>
                 </div>
                 <div class="col-md-4">

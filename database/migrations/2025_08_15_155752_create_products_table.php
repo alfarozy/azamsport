@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->foreignId('category_id')->constrained();
-            $table->decimal('price', 10, 2);
-            $table->integer('stock')->default(0);
+            $table->decimal('price', 10, 2)->nullable();
+            $table->integer('stock')->nullable()->default(0);
             $table->string('unit')->default('item'); // Satuan: pcs, set, pasang, dll
             $table->string('image')->nullable();
             $table->boolean('enabled')->default(true);
